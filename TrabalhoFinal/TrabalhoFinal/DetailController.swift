@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailController: UIViewController {
+class DetailController: UIViewController, UIGestureRecognizerDelegate {
 
     var selectedItem: (title: String, description: String, date: Date)?
     
@@ -18,9 +18,20 @@ class DetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.view.isUserInteractionEnabled = true
+        self.view.isMultipleTouchEnabled = true
+
+        let gestureRigthSwipte = UISwipeGestureRecognizer(target: self, action: #selector(DetailController.rightSwipe( _ : )))
+
+        gestureRigthSwipte.delegate = self
+        gestureRigthSwipte.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(gestureRigthSwipte)
     }
 
+    @objc func rightSwipe(_ sender : UISwipeGestureRecognizer) {
+        self.tabBarController?.selectedIndex = 0
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -86,7 +86,7 @@ class ViewController: UITableViewController, UISearchBarDelegate {
         
         for (title, description, date) in originalList {
             
-            if (title.range(of: searchText) != nil) {
+            if (title.uppercased().range(of: searchText.uppercased()) != nil) {
                 list.append((title, description, date))
             }
             
